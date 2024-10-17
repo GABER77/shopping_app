@@ -41,7 +41,7 @@ class Spaces {
   static  SizedBox vSpacingS = SizedBox(height: 4.0.h);
   static  SizedBox vSpacingM = SizedBox(height: 16.0.h);
   static  SizedBox vSpacingL = SizedBox(height: 32.0.h);
-  static  SizedBox vSpacingXL = SizedBox(height: 4.0.h);
+  static  SizedBox vSpacingXL = SizedBox(height: 40.0.h);
   static  SizedBox hSpacingS = SizedBox(width: 4.0.w);
   static  SizedBox hSpacingM = SizedBox(width: 8.0.w);
   static  SizedBox hSpacingL = SizedBox(width: 16.0.w);

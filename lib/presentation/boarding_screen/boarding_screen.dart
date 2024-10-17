@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/presentation/authentication_screens/login_screen.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
-import 'package:shopping_app/shared/widgets/navigation_widgets.dart';
+import 'package:shopping_app/shared/core/navigation.dart';
+import 'package:shopping_app/shared/widgets/default_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'boarding_item_widget.dart';
 
@@ -63,7 +64,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               'SKIP',
               style: TextStyle(
                 fontSize: 12.sp,
-                color: AppColors.primaryColor,
+                color: AppColors.monoPrimaryColor,
               ),
             ),
           ),
@@ -107,34 +108,28 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   count: boardingList.length,
                   effect: const ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: AppColors.primaryColor,
+                    activeDotColor: AppColors.monoPrimaryColor,
                   ),
                 ),
                 const Spacer(),
-                Container(
-                  width: 57,
-                  height: 57,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.r),
-                    color: AppColors.primaryColor,
-                  ),
-                  child: IconButton(
+                DefaultButton(
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
                     onPressed: () {
-                      if(isLastPage == true)
-                      {
+                      if(isLastPage == true) {
                         navigateToAndClose(context, LoginScreen());
                       }
-                      else
-                      {
+                      else {
                         boardingController.nextPage(
                           duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn,
                         );
                       }
                     },
-                    icon: const Icon(Icons.arrow_forward_ios,),
-                    color: Colors.white,
-                  ),
+                    width: 57,
+                    height: 57,
                 ),
               ],
             ),
