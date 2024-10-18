@@ -74,7 +74,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
         children: [
           Expanded(
             child: PageView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               controller: boardingController,
               onPageChanged: (index) {
                 if (index == boardingList.length - 1)
@@ -113,10 +113,6 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 ),
                 const Spacer(),
                 DefaultButton(
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                    ),
                     onPressed: () {
                       if(isLastPage == true) {
                         navigateToAndClose(context, LoginScreen());
@@ -130,6 +126,10 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     },
                     width: 57,
                     height: 57,
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
                 ),
               ],
             ),

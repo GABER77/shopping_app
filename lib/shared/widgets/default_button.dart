@@ -3,23 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
 
 class DefaultButton extends StatelessWidget {
-  final Widget child;
   final VoidCallback onPressed;
   final Color? color;
   final LinearGradient gradientColor;
   final double width;
   final double height;
   final bool? boarderColor;
+  final Widget child;
 
   const DefaultButton({
     super.key,
-    required this.child,
     required this.onPressed,
     this.color,
     this.gradientColor = AppColors.primaryColor,
     required this.width,
     required this.height,
     this.boarderColor,
+    required this.child,
   });
 
   @override
