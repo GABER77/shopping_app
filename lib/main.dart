@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/presentation/boarding_screen/boarding_screen.dart';
 import 'business_logic/bloc/bloc_observer.dart';
-import 'data/dio_helper.dart';
+import 'data/api_config/dio_helper.dart';
 
 void main(){
   DioHelper.init();

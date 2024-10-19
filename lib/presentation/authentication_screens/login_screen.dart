@@ -5,6 +5,7 @@ import 'package:shopping_app/business_logic/cubit/cubit.dart';
 import 'package:shopping_app/business_logic/cubit/states.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
+import 'package:shopping_app/shared/core/toast.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
 import 'package:shopping_app/shared/widgets/default_button.dart';
 import '../../shared/constants/colors.dart';
@@ -23,7 +24,22 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is LoginSuccessState){
+            if(state.loginModel.status!){
+              customToast(
+                message: state.loginModel.message,
+                backgroundColor: Colors.green,
+              );
+            }
+            else{
+              customToast(
+                message: state.loginModel.message,
+                backgroundColor: Colors.red,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(

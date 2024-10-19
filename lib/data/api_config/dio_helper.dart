@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 
-import 'interceptor.dart';
-
 class DioHelper{
   static Dio? dio;
 
@@ -16,7 +14,7 @@ class DioHelper{
       ),
     );
 
-    dio?.interceptors.add(AppInterceptor());
+    //dio?.interceptors.add(AppInterceptor());
   }
 
   static Future<Response?> getData({
@@ -41,7 +39,6 @@ class DioHelper{
     required Map<String, dynamic> data,
     String lang = 'en',
     String? authorization,
-
 }) async{
     dio?.options.headers = {
       'lang' : lang,

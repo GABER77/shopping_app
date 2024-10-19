@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/business_logic/cubit/states.dart';
-import 'package:shopping_app/data/dio_helper.dart';
-import 'package:shopping_app/data/end_points.dart';
+import 'package:shopping_app/data/api_config/dio_helper.dart';
+import 'package:shopping_app/data/api_config/end_points.dart';
+import '../../data/models/login_model.dart';
 
 class LoginCubit extends Cubit<LoginStates>{
-  
   LoginCubit() : super(LoginInitialState());
+
   static LoginCubit get(context) => BlocProvider.of(context);
 
   IconData suffixIcon = Icons.visibility_outlined;
   bool isPasswordHidden = true;
+  LoginModel? loginModel;
 
   void changePasswordVisibility(){
     isPasswordHidden = !isPasswordHidden;
@@ -31,8 +33,8 @@ class LoginCubit extends Cubit<LoginStates>{
         'password' : password,
       },
     ).then((value) {
-      print(value?.data);
-      emit(LoginSuccessState());
+      loginModel = LoginModel.fromJson(value?.data);
+      emit(LoginSuccessState(loginModel!));
     }).catchError((error){
       print(error.toString());
       emit(LoginErrorState(error.toString()));
