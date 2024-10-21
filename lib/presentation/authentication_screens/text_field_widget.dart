@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/shared/constants/colors.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final TextInputType keyboardType;
   final TextEditingController? controller;
@@ -23,21 +24,51 @@ class CustomTextFormField extends StatelessWidget {
   });
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+
+  FocusNode myFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      obscureText: obscureText,
+      controller: widget.controller,
+      keyboardType: widget.keyboardType,
+      obscureText: widget.obscureText,
+      validator: widget.validator,
+      focusNode: myFocusNode,
       decoration: InputDecoration(
-        labelText: labelText,
-        border: const UnderlineInputBorder(),
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-        suffixIcon: suffixIcon != null ? IconButton(
-          icon: Icon(suffixIcon),
-          onPressed: onSuffixIconPressed,
+        labelText: widget.labelText,
+        labelStyle: TextStyle(
+          color: myFocusNode.hasFocus
+              ? AppColors.monoPrimaryColor
+              : null,
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.monoPrimaryColor),
+        ),
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+        suffixIcon: widget.suffixIcon != null ? IconButton(
+          icon: Icon(widget.suffixIcon),
+          onPressed: widget.onSuffixIconPressed,
         ) : null,
       ),
-      validator: validator,
     );
   }
 }

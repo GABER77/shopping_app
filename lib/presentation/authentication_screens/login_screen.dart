@@ -53,14 +53,7 @@ class LoginScreen extends StatelessWidget {
                           width: double.infinity,
                           height: 250.h,
                           decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFFEC407A),
-                                Color(0xFFFFB74D),
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                            ),
+                            gradient: AppColors.primaryColor,
                           ),
                         ),
                       ),
@@ -194,7 +187,7 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: () {},
                                 width: 120.w,
                                 height: 35.h,
-                                color: Colors.white70,
+                                color: Colors.white,
                                 boarderColor: true,
                                 child: Image.asset(
                                     'assets/images/Google.png'
