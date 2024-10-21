@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/login_screen.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
 import 'package:shopping_app/shared/core/navigation.dart';
@@ -21,7 +22,6 @@ class BoardingModel{
 
 class BoardingScreen extends StatefulWidget {
   const BoardingScreen({super.key});
-
 
   @override
   State<BoardingScreen> createState() => _BoardingScreenState();
@@ -46,6 +46,11 @@ class _BoardingScreenState extends State<BoardingScreen> {
         body: 'Experience fast and reliable delivery, with options to choose express shipping for urgent purchases.' ,
     ),
   ];
+  void submitBoarding(){
+    CacheHelper.saveData(key: 'isBoardingComplete', value: true).then((value) {
+      if (value) navigateToAndClose(context, LoginScreen());
+    });
+  }
   var boardingController = PageController();
   bool isLastPage = false;
 
@@ -58,7 +63,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              navigateToAndClose(context, LoginScreen());
+              submitBoarding();
             },
             child: Text(
               'SKIP',
@@ -115,7 +120,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 DefaultButton(
                     onPressed: () {
                       if(isLastPage == true) {
-                        navigateToAndClose(context, LoginScreen());
+                        submitBoarding();
                       }
                       else {
                         boardingController.nextPage(

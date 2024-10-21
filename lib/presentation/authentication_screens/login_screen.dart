@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/cubit.dart';
 import 'package:shopping_app/business_logic/cubit/states.dart';
+import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
+import 'package:shopping_app/presentation/home_screen/home_screen.dart';
+import 'package:shopping_app/shared/core/navigation.dart';
 import 'package:shopping_app/shared/core/toast.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
 import 'package:shopping_app/shared/widgets/default_button.dart';
@@ -27,15 +30,14 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if(state is LoginSuccessState){
             if(state.loginModel.status!){
-              customToast(
-                message: state.loginModel.message,
-                backgroundColor: Colors.green,
-              );
+              CacheHelper.saveData(key: 'token', value: state.loginModel.data?.token).then((value) {
+                navigateToAndClose(context, const HomeScreen());
+              });
             }
             else{
               customToast(
                 message: state.loginModel.message,
-                backgroundColor: Colors.red,
+                state: ToastStates.ERROR,
               );
             }
           }
