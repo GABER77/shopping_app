@@ -46,9 +46,9 @@ class _BoardingScreenState extends State<BoardingScreen> {
         body: 'Experience fast and reliable delivery, with options to choose express shipping for urgent purchases.' ,
     ),
   ];
-  void submitBoarding(){
+  void submitBoarding(context){
     CacheHelper.saveData(key: 'isBoardingComplete', value: true).then((value) {
-      if (value) navigateToAndClose(context, LoginScreen());
+      if (value && context.mounted) navigateToAndClose(context, LoginScreen());
     });
   }
   var boardingController = PageController();
@@ -63,7 +63,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              submitBoarding();
+              submitBoarding(context);
             },
             child: Text(
               'SKIP',
@@ -120,7 +120,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                 DefaultButton(
                     onPressed: () {
                       if(isLastPage == true) {
-                        submitBoarding();
+                        submitBoarding(context);
                       }
                       else {
                         boardingController.nextPage(

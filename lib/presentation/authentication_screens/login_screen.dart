@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shopping_app/business_logic/cubit/cubit.dart';
-import 'package:shopping_app/business_logic/cubit/states.dart';
+import 'package:shopping_app/business_logic/cubit/authentication/authentication_cubit.dart';
 import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
@@ -11,27 +10,30 @@ import 'package:shopping_app/shared/core/navigation.dart';
 import 'package:shopping_app/shared/core/toast.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
 import 'package:shopping_app/shared/widgets/default_button.dart';
+import '../../business_logic/cubit/authentication/authentication_states.dart';
 import '../../shared/constants/colors.dart';
 import '../../shared/constants/spaces.dart';
 
 class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  var formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
-
     return BlocProvider(
-      create: (BuildContext context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginStates>(
+      create: (BuildContext context) => AuthenticationCubit(),
+      child: BlocConsumer<AuthenticationCubit, AuthenticationStates>(
         listener: (context, state) {
           if(state is LoginSuccessState){
             if(state.loginModel.status!){
-              CacheHelper.saveData(key: 'token', value: state.loginModel.data?.token).then((value) {
-                navigateToAndClose(context, const HomeScreen());
+              final token = state.loginModel.data?.token;
+              CacheHelper.saveData(key: 'token', value: token).then((value) {
+                if (context.mounted){
+                  navigateToAndClose(context, const HomeScreen());
+                }
               });
             }
             else{
@@ -134,9 +136,9 @@ class LoginScreen extends StatelessWidget {
                             labelText: 'Password',
                             controller: passwordController,
                             prefixIcon: Icons.lock_outline,
-                            suffixIcon: LoginCubit.get(context).suffixIcon,
+                            suffixIcon: AuthenticationCubit.get(context).suffixIcon,
                             keyboardType: TextInputType.visiblePassword,
-                            obscureText: LoginCubit.get(context).isPasswordHidden,
+                            obscureText: AuthenticationCubit.get(context).isPasswordHidden,
                             validator: (value){
                               if(value!.isEmpty){
                                 return 'Please enter your Password';
@@ -144,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                               return null;
                             },
                             onSuffixIconPressed: () {
-                              LoginCubit.get(context).changePasswordVisibility();
+                              AuthenticationCubit.get(context).changePasswordVisibility();
                             },
                           ),
                           Spaces.vSpacingXL,
@@ -153,7 +155,7 @@ class LoginScreen extends StatelessWidget {
                             widgetIfTrue: DefaultButton(
                               onPressed: () {
                                 if(formKey.currentState!.validate()){
-                                  LoginCubit.get(context).userLogin(
+                                  AuthenticationCubit.get(context).userLogin(
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );

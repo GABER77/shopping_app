@@ -10,4 +10,9 @@ class AppColors{
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+  static const navBarColor = Colors.black;
+  static const navBarSelectedIconColor = Colors.black;
+  static const navBarNotSelectedIconColor = Colors.white;
+  static const navBarSelectedCircleColor = monoPrimaryColor;
+  static const navBarNotSelectedCircleColor = Colors.transparent;
 }
