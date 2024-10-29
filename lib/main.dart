@@ -22,10 +22,8 @@ void main() async {
 Future<void> _initializeSettings() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    )
-  );
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
   await CacheHelper.init();
   DioHelper.init();
   Bloc.observer = MyBlocObserver();

@@ -12,12 +12,13 @@ class NavBarCubit extends Cubit<NavBarStates> {
   static NavBarCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
+  bool isSearchActive  = false;
 
   List<Widget> screens = [
-    const HomeScreen(),
-    const CartScreen(),
-    const FavouriteScreen(),
-    const SettingsScreen(),
+    HomeScreen(),
+    CartScreen(),
+    FavouriteScreen(),
+    SettingsScreen(),
   ];
 
   List<IconData> navBarIcons = [
@@ -29,7 +30,17 @@ class NavBarCubit extends Cubit<NavBarStates> {
 
   void changeScreen(int index){
     currentIndex = index;
-    emit(NavBarChangeState());
+    emit(NavBarScreenChangeState());
+  }
+
+  void hideNavBar() {
+    isSearchActive = true;
+    emit(NavBarChangeVisibilityState());
+  }
+
+  void showNavBar() {
+    isSearchActive = false;
+    emit(NavBarChangeVisibilityState());
   }
 
 }

@@ -13,7 +13,7 @@ class SettingsScreen extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             CacheHelper.removeData(key: 'token').then((value) {
-              if(value) navigateToAndClose(context, LoginScreen());
+              if(value && context.mounted) navigateToAndClose(context, LoginScreen());
             });
           },
           child: const Text(

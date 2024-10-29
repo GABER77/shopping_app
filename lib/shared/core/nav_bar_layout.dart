@@ -15,56 +15,72 @@ class NavBarLayout extends StatelessWidget {
       builder: (context, state) {
         var cubit = NavBarCubit.get(context);
         return Scaffold(
-          bottomNavigationBar: SafeArea(
+          bottomNavigationBar: !cubit.isSearchActive? SafeArea(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: 40.h,
+                bottom: 55.h,
                 left: 65.w,
                 right: 65.w,
               ),
               child: Container(
-                height: 55.h,
+                height: 47.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.r),
                   color: AppColors.navBarColor.withOpacity(0.8),
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.navBarColor.withOpacity(0.5),
-                      offset: const Offset(0,20),
-                      blurRadius: 20,
+                      blurRadius: 30.r,
                     ),
                   ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children:
-                    List.generate(
-                      cubit.screens.length,
-                      (index) => Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: cubit.currentIndex == index
-                              ? AppColors.navBarSelectedCircleColor
-                              : AppColors.navBarNotSelectedCircleColor,
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            cubit.changeScreen(index);
-                          },
-                          icon: Icon(
-                            cubit.navBarIcons[index],
-                            size: 30.sp,
-                            color: cubit.currentIndex == index
-                                ? AppColors.navBarSelectedIconColor
-                                : AppColors.navBarNotSelectedIconColor,
-                          ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children:
+                      List.generate(
+                        cubit.screens.length,
+                        (index) => Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Stack(
+                              alignment: Alignment.topCenter,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    cubit.changeScreen(index);
+                                  },
+                                  icon: Icon(
+                                    cubit.navBarIcons[index],
+                                    size: 25.sp,
+                                    color: cubit.currentIndex == index
+                                        ? AppColors.navBarSelectedIconColor
+                                        : AppColors.navBarNotSelectedIconColor,
+                                  ),
+                                ),
+                                Container(
+                                  width: 20.w,
+                                  height: 2.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.r),
+                                    color: cubit.currentIndex == index
+                                        ? AppColors.navBarSelectedCircleColor
+                                        : AppColors.navBarNotSelectedCircleColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ]
                         ),
                       ),
-                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ) : null,
           body: cubit.screens[cubit.currentIndex],
         );
       },

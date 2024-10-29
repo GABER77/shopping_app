@@ -5,7 +5,7 @@ import 'package:shopping_app/business_logic/cubit/authentication/authentication_
 import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
-import 'package:shopping_app/presentation/home_screen/home_screen.dart';
+import 'package:shopping_app/shared/core/nav_bar_layout.dart';
 import 'package:shopping_app/shared/core/navigation.dart';
 import 'package:shopping_app/shared/core/toast.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
               final token = state.loginModel.data?.token;
               CacheHelper.saveData(key: 'token', value: token).then((value) {
                 if (context.mounted){
-                  navigateToAndClose(context, const HomeScreen());
+                  navigateToAndClose(context, const NavBarLayout());
                 }
               });
             }
