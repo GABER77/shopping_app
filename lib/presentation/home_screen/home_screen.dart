@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/business_logic/cubit/home/home_cubit.dart';
+import 'package:shopping_app/business_logic/cubit/home/home_states.dart';
 import 'package:shopping_app/presentation/home_screen/animated_search_bar.dart';
 import 'package:shopping_app/presentation/search_screen/search_screen.dart';
 import '../../shared/constants/colors.dart';
@@ -22,42 +25,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 10.h,
-          ),
-          child: AppBar(
-            title: showScreen1 ? Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.r),
-                color: Colors.grey[200],
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.notifications,
-                  color: AppColors.monoPrimaryColor,
-                  size: 25.sp,
-                ),
-                onPressed: () {},
-              ),
-            ) : null,
-            actions: [
-              Padding(
+    return BlocProvider(
+      create: (BuildContext context) => HomeCubit()..getHomeData(),
+      child: BlocConsumer<HomeCubit, HomeStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(60.h),
+              child: Padding(
                 padding: EdgeInsets.only(
-                    right: 15.w
+                  top: 10.h,
                 ),
-                child: AnimatedSearchBar(toggleScreen: toggleScreen),
+                child: AppBar(
+                  title: showScreen1 ? Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.r),
+                      color: Colors.grey[200],
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.notifications,
+                        color: AppColors.monoPrimaryColor,
+                        size: 25.sp,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ) : null,
+                  actions: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: 15.w
+                      ),
+                      child: AnimatedSearchBar(toggleScreen: toggleScreen),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            ),
+            body: showScreen1 ? const Screen1() : const SearchScreen(),
+          );
+        },
       ),
-      body: showScreen1 ? const Screen1() : const SearchScreen(),
     );
   }
 }

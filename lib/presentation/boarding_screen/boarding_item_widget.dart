@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/constants/spaces.dart';
-import 'boarding_screen.dart';
+import 'boarding_model.dart';
 
 class BoardingItem extends StatelessWidget {
   const BoardingItem({

@@ -7,18 +7,7 @@ import 'package:shopping_app/shared/core/navigation.dart';
 import 'package:shopping_app/shared/widgets/default_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'boarding_item_widget.dart';
-
-class BoardingModel{
-  final String image;
-  final String title;
-  final String body;
-
-  BoardingModel({
-    required this.image,
-    required this.title,
-    required this.body,
-});
-}
+import 'boarding_model.dart';
 
 class BoardingScreen extends StatefulWidget {
   const BoardingScreen({super.key});
@@ -29,37 +18,18 @@ class BoardingScreen extends StatefulWidget {
 
 class _BoardingScreenState extends State<BoardingScreen> {
 
-  List<BoardingModel> boardingList = [
-    BoardingModel(
-        image: 'assets/images/OnBoarding1.jpg',
-        title: 'Discover',
-        body: 'Explore top brands, unbeatable deals, and personalized recommendations. Your perfect shopping experience starts here!' ,
-    ),
-    BoardingModel(
-        image: 'assets/images/OnBoarding2.jpg',
-        title: 'Secure & Fast Checkout',
-        body: 'Save your payment details for a fast, hassle-free, and secure shopping experience every time.' ,
-    ),
-    BoardingModel(
-        image: 'assets/images/OnBoarding3.jpg',
-        title: 'Enjoy',
-        body: 'Experience fast and reliable delivery, with options to choose express shipping for urgent purchases.' ,
-    ),
-  ];
+  var boardingController = PageController();
+  bool isLastPage = false;
   void submitBoarding(context){
     CacheHelper.saveData(key: 'isBoardingComplete', value: true).then((value) {
       if (value && context.mounted) navigateToAndClose(context, LoginScreen());
     });
   }
-  var boardingController = PageController();
-  bool isLastPage = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         actions: [
           TextButton(
             onPressed: () {

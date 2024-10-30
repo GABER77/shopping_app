@@ -67,8 +67,8 @@ class NavBarLayout extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.r),
                                     color: cubit.currentIndex == index
-                                        ? AppColors.navBarSelectedCircleColor
-                                        : AppColors.navBarNotSelectedCircleColor,
+                                        ? AppColors.navBarSelectedIndicatorColor
+                                        : AppColors.navBarNotSelectedIndicatorColor,
                                   ),
                                 ),
                               ],

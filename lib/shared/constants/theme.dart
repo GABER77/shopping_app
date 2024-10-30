@@ -5,7 +5,7 @@ import 'package:shopping_app/shared/constants/colors.dart';
 
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: AppColors.scaffoldColorLight,
   progressIndicatorTheme: const ProgressIndicatorThemeData(
     color: AppColors.monoPrimaryColor,
   ),
@@ -20,7 +20,7 @@ ThemeData lightMode = ThemeData(
       statusBarIconBrightness: Brightness.dark,
     ),
     scrolledUnderElevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: AppColors.appBarColorLight,
     titleTextStyle: TextStyle(
       fontSize: 18.sp,
       color: Colors.black,
@@ -40,7 +40,7 @@ ThemeData lightMode = ThemeData(
 
 ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: Colors.black,
+  scaffoldBackgroundColor: AppColors.scaffoldColorDark,
   colorSchemeSeed: Colors.white,
   progressIndicatorTheme: const ProgressIndicatorThemeData(
     color: AppColors.monoPrimaryColor,
@@ -56,7 +56,7 @@ ThemeData darkMode = ThemeData(
       statusBarIconBrightness: Brightness.light,
     ),
     scrolledUnderElevation: 0,
-    backgroundColor: Colors.black,
+    backgroundColor: AppColors.appBarColorDark,
     elevation: 0,
     titleTextStyle: TextStyle(
       fontSize: 18.sp,
