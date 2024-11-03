@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_states.dart';
 import 'package:shopping_app/presentation/cart_screen/cart_screen.dart';
 import 'package:shopping_app/presentation/favourite_screen/favourite_screen.dart';
-import 'package:shopping_app/presentation/home_screen/home_screen.dart';
+import '../../../presentation/primary_screen/primary_screen.dart';
 import '../../../presentation/settings_screen/setting_screen.dart';
 
 class NavBarCubit extends Cubit<NavBarStates> {
@@ -15,7 +15,7 @@ class NavBarCubit extends Cubit<NavBarStates> {
   bool isSearchActive  = false;
 
   List<Widget> screens = [
-    HomeScreen(),
+    PrimaryScreen(),
     CartScreen(),
     FavouriteScreen(),
     SettingsScreen(),

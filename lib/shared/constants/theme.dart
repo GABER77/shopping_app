@@ -7,16 +7,16 @@ ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: AppColors.scaffoldColorLight,
   progressIndicatorTheme: const ProgressIndicatorThemeData(
-    color: AppColors.monoPrimaryColor,
+    color: AppColors.secondaryColor,
   ),
   textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: AppColors.monoPrimaryColor,
-    selectionHandleColor: AppColors.monoPrimaryColor,
-    selectionColor: AppColors.monoPrimaryColor,
+    cursorColor: AppColors.secondaryColor,
+    selectionHandleColor: AppColors.secondaryColor,
+    selectionColor: AppColors.secondaryColor,
   ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: AppColors.appBarColorLight,
       statusBarIconBrightness: Brightness.dark,
     ),
     scrolledUnderElevation: 0,
@@ -34,7 +34,7 @@ ThemeData lightMode = ThemeData(
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: AppColors.monoPrimaryColor,
+    selectedItemColor:AppColors.secondaryColor,
   ),
 );
 
@@ -43,16 +43,16 @@ ThemeData darkMode = ThemeData(
   scaffoldBackgroundColor: AppColors.scaffoldColorDark,
   colorSchemeSeed: Colors.white,
   progressIndicatorTheme: const ProgressIndicatorThemeData(
-    color: AppColors.monoPrimaryColor,
+    color: AppColors.secondaryColor,
   ),
   textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: AppColors.monoPrimaryColor,
-    selectionHandleColor: AppColors.monoPrimaryColor,
-    selectionColor: AppColors.monoPrimaryColor,
+    cursorColor: AppColors.secondaryColor,
+    selectionHandleColor: AppColors.secondaryColor,
+    selectionColor: AppColors.secondaryColor,
   ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: AppColors.appBarColorDark,
       statusBarIconBrightness: Brightness.light,
     ),
     scrolledUnderElevation: 0,
@@ -72,6 +72,6 @@ ThemeData darkMode = ThemeData(
     type: BottomNavigationBarType.fixed,
     selectedItemColor: Colors.deepOrange,
     unselectedItemColor: Colors.grey,
-    backgroundColor: AppColors.monoPrimaryColor,
+    backgroundColor: AppColors.secondaryColor,
   ),
 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/business_logic/cubit/home/home_cubit.dart';
 import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/login_screen.dart';
@@ -44,8 +45,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NavBarCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => NavBarCubit(),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => HomeCubit()..getHomeData(),
+        ),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
@@ -55,7 +63,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: lightMode,
             darkTheme: darkMode,
-            themeMode: ThemeMode.light,
+            themeMode: ThemeMode.dark,
             home: startScreen,
           );
         },

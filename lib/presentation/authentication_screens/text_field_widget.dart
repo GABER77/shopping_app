@@ -57,11 +57,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         labelText: widget.labelText,
         labelStyle: TextStyle(
           color: myFocusNode.hasFocus
-              ? AppColors.monoPrimaryColor
+              ? AppColors.textColor
               : null,
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.monoPrimaryColor),
+          borderSide: BorderSide(color: AppColors.secondaryColor),
         ),
         prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
         suffixIcon: widget.suffixIcon != null ? IconButton(

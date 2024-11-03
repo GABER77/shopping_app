@@ -45,7 +45,7 @@ class ProductsModel{
   ProductsModel.fromJson(Map<String, dynamic> json){
     id = json['id'];
     price = json['price'];
-    oldPrice = json['oldPrice'];
+    oldPrice = json['old_price'];
     discount = json['discount'];
     image = json['image'];
     name = json['name'];

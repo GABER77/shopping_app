@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/authentication/authentication_cubit.dart';
+import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
@@ -23,6 +25,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ));
+
     return BlocProvider(
       create: (BuildContext context) => AuthenticationCubit(),
       child: BlocConsumer<AuthenticationCubit, AuthenticationStates>(
@@ -32,6 +40,7 @@ class LoginScreen extends StatelessWidget {
               final token = state.loginModel.data?.token;
               CacheHelper.saveData(key: 'token', value: token).then((value) {
                 if (context.mounted){
+                  context.read<NavBarCubit>().currentIndex = 0;
                   navigateToAndClose(context, const NavBarLayout());
                 }
               });
@@ -56,9 +65,7 @@ class LoginScreen extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           height: 250.h,
-                          decoration: const BoxDecoration(
-                            gradient: AppColors.primaryColor,
-                          ),
+                          color: AppColors.secondaryColor,
                         ),
                       ),
                       SafeArea(
@@ -76,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 25.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                                      color: AppColors.primaryColor1,
                                     ),
                                   ),
                                   Spaces.vSpacingS,
@@ -84,6 +91,7 @@ class LoginScreen extends StatelessWidget {
                                     'assets/images/Cart.png',
                                     width: 80.w,
                                     height: 80.h,
+                                    color: AppColors.primaryColor1,
                                   ),
                                   Spaces.vSpacingS,
                                   Text(
@@ -91,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 17.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                                      color: AppColors.primaryColor1,
                                     ),
                                   ),
                                   Text(
@@ -99,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 17.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                                      color: AppColors.primaryColor1,
                                     ),
                                   ),
                                 ],
@@ -166,7 +174,7 @@ class LoginScreen extends StatelessWidget {
                               child: Text(
                                 'Log In',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.primaryColor1,
                                   fontSize: 17.sp,
                                 ),
                               ),
@@ -212,7 +220,7 @@ class LoginScreen extends StatelessWidget {
                               "Sign up",
                               style: TextStyle(
                                 fontSize: 17.sp,
-                                color: AppColors.monoPrimaryColor,
+                                color: AppColors.textColor,
                               ),
                             ),
                           ),

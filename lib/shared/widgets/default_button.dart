@@ -4,8 +4,7 @@ import 'package:shopping_app/shared/constants/colors.dart';
 
 class DefaultButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final Color? color;
-  final LinearGradient gradientColor;
+  final Color color;
   final double width;
   final double height;
   final bool? boarderColor;
@@ -14,8 +13,7 @@ class DefaultButton extends StatelessWidget {
   const DefaultButton({
     super.key,
     required this.onPressed,
-    this.color,
-    this.gradientColor = AppColors.primaryColor,
+    this.color = AppColors.secondaryColor,
     required this.width,
     required this.height,
     this.boarderColor,
@@ -30,7 +28,6 @@ class DefaultButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.r),
         color: color,
-        gradient: color == null ? gradientColor : null,
         border: boarderColor != null ? Border.all(
           color: Colors.black,
           width: 1,

@@ -27,10 +27,10 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
         curve: Curves.easeOut,
         width: isOpen ? 330.w : 50,
         height: 50,
-        decoration: BoxDecoration(
+        decoration: isOpen ? BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
-          color: Colors.grey[200],
-        ),
+          color: AppColors.primaryColor2,
+        ): null,
         child: isOpen ?
             Row(
               children: [
@@ -52,14 +52,15 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
                         ),
                         border: InputBorder.none,
                       ),
-                      cursorColor: Colors.black,
+                      cursorColor: AppColors.secondaryColor,
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.close,
-                    color: AppColors.monoPrimaryColor,
+                    color: AppColors.secondaryColor,
+                    size: 24.sp,
                   ),
                   onPressed: () {
                     setState(() {
@@ -72,7 +73,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
         : IconButton(
           icon: Icon(
             Icons.search,
-            color: AppColors.monoPrimaryColor,
+            color: AppColors.secondaryColor,
             size: 25.sp,
           ),
           onPressed: () {

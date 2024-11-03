@@ -39,7 +39,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               'SKIP',
               style: TextStyle(
                 fontSize: 12.sp,
-                color: AppColors.monoPrimaryColor,
+                color: AppColors.textColor,
               ),
             ),
           ),
@@ -83,7 +83,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                   count: boardingList.length,
                   effect: const ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: AppColors.monoPrimaryColor,
+                    activeDotColor: AppColors.secondaryColor,
                   ),
                 ),
                 const Spacer(),
