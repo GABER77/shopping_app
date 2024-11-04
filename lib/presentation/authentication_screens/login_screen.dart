@@ -28,7 +28,6 @@ class LoginScreen extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
       ));
 
     return BlocProvider(
@@ -65,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           height: 250.h,
-                          color: AppColors.secondaryColor,
+                          color: AppColors.primaryColor2,
                         ),
                       ),
                       SafeArea(
@@ -74,16 +73,16 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                top: 15.h,
+                                top: 18.h,
                               ),
                               child: Column(
                                 children: [
                                   Text(
                                     'Log In',
                                     style: TextStyle(
-                                      fontSize: 25.sp,
+                                      fontSize: 23.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: AppColors.primaryColor1,
+                                      color: AppColors.secondaryColor,
                                     ),
                                   ),
                                   Spaces.vSpacingS,
@@ -91,23 +90,23 @@ class LoginScreen extends StatelessWidget {
                                     'assets/images/Cart.png',
                                     width: 80.w,
                                     height: 80.h,
-                                    color: AppColors.primaryColor1,
+                                    color: AppColors.secondaryColor,
                                   ),
                                   Spaces.vSpacingS,
                                   Text(
                                     'Shop Smart, Save Big',
                                     style: TextStyle(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: AppColors.primaryColor1,
+                                      color: AppColors.secondaryColor,
                                     ),
                                   ),
                                   Text(
                                     'Like Never Before',
                                     style: TextStyle(
-                                      fontSize: 17.sp,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w500,
-                                      color: AppColors.primaryColor1,
+                                      color: AppColors.secondaryColor,
                                     ),
                                   ),
                                 ],

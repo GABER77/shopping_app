@@ -51,7 +51,9 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => NavBarCubit(),
         ),
         BlocProvider(
-          create: (BuildContext context) => HomeCubit()..getHomeData(),
+          create: (BuildContext context) => HomeCubit()
+            ..getHomeData()
+            ..getCategoriesData(),
         ),
       ],
       child: ScreenUtilInit(

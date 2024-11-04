@@ -14,22 +14,26 @@ class ProductsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: homeModel.data!.products.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 20.h,
-        crossAxisSpacing: 25.w,
-        mainAxisExtent: 200.h,
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: homeModel.data!.products.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 20.h,
+          crossAxisSpacing: 25.w,
+          mainAxisExtent: 200.h,
+        ),
+        itemBuilder: (context, index) => buildProductsGrid(homeModel.data!.products[index]),
       ),
-      itemBuilder: (context, index) => itemBuilder(homeModel.data!.products[index]),
     );
   }
 }
 
-Widget itemBuilder(ProductsModel model) => Column(
+Widget buildProductsGrid(ProductsModel model) => Column(
   children: [
     Container(
       width: 155.w,

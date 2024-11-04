@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/presentation/home_screen/home_screen.dart';
 import 'package:shopping_app/presentation/search_screen/search_screen.dart';
 import '../../shared/constants/colors.dart';
+import '../../shared/constants/spaces.dart';
 import 'animated_search_bar.dart';
 
 class PrimaryScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _PrimaryScreenState extends State<PrimaryScreen> {
           SliverAppBar(
             floating: true,
             snap: true,
-            title: showHomeScreen ? Container(
+            leading: showHomeScreen ? Container(
               width: 50,
               height: 50,
               decoration: BoxDecoration(
@@ -45,13 +46,27 @@ class _PrimaryScreenState extends State<PrimaryScreen> {
                 onPressed: () {},
               ),
             ) : null,
-            actions: [
-              Padding(
-                padding: EdgeInsets.only(
-                    right: 15.w
+            title: showHomeScreen ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/Cart.png',
+                  width: 32.w,
+                  height: 32.h,
+                  color: AppColors.secondaryColor,
                 ),
-                child: AnimatedSearchBar(toggleScreen: toggleScreen),
-              ),
+                Spaces.hSpacingS,
+                Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+              ],
+            ) : null,
+            actions: [
+              AnimatedSearchBar(toggleScreen: toggleScreen),
             ],
           ),
         ],

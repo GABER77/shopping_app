@@ -23,9 +23,9 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
     return WillPopScope(
       onWillPop: handleBackButtonPress,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
-        width: isOpen ? 330.w : 50,
+        width: isOpen ? 355.w : 50,
         height: 50,
         decoration: isOpen ? BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
