@@ -85,8 +85,8 @@ Widget buildProductGrid(ProductModel model, context) =>
               height: 130.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.r),
-                  topRight: Radius.circular(10.r),
+                  topLeft: Radius.circular(15.r),
+                  topRight: Radius.circular(15.r),
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
@@ -114,8 +114,8 @@ Widget buildProductGrid(ProductModel model, context) =>
           height: 70.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(10.r),
-              bottomLeft: Radius.circular(10.r),
+              bottomRight: Radius.circular(15.r),
+              bottomLeft: Radius.circular(15.r),
             ),
             color: AppColors.primaryColor2,
           ),
