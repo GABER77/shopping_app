@@ -13,23 +13,47 @@ class CategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 95.h,
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        itemBuilder: (context, index) => buildCategoryItem(categoriesModel.data!.data[index]),
-        separatorBuilder: (context, index) => SizedBox(
-          width: 12.w,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 12.h,
         ),
-        itemCount: categoriesModel.data!.data.length,
-      ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 15.w
+          ),
+          child: Text(
+            'Categories',
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textColor,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 12.h,
+        ),
+        SizedBox(
+          height: 95.h,
+          child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            itemBuilder: (context, index) => buildCategoryItem(categoriesModel.data!.data[index]),
+            separatorBuilder: (context, index) => SizedBox(
+              width: 12.w,
+            ),
+            itemCount: categoriesModel.data!.data.length,
+          ),
+        ),
+      ],
     );
   }
 }
 
-Widget buildCategoryItem(DataModel model) => Column(
+Widget buildCategoryItem(CategoryModel model) => Column(
   children: [
     Container(
       width: 70,

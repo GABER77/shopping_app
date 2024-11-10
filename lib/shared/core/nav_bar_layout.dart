@@ -33,14 +33,14 @@ Widget buildNavBar(NavBarCubit cubit) {
     child: Padding(
       padding: EdgeInsets.only(
         bottom: 50.h,
-        left: 75.w,
-        right: 75.w,
+        left: 80.w,
+        right: 80.w,
       ),
       child: Container(
         height: 47.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50.r),
-          color: AppColors.navBarColor.withOpacity(0.9),
+          color: AppColors.navBarColor,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.8),

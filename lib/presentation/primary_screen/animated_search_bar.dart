@@ -16,12 +16,18 @@ class AnimatedSearchBar extends StatefulWidget {
 class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
 
   bool isOpen = false;
+  bool backButtonPressed = false;
   final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: handleBackButtonPress,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, dynamic result){
+        if (isOpen) {
+          closeSearchBar();
+        }
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
@@ -90,6 +96,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
     isOpen = !isOpen;
     widget.toggleScreen();
     context.read<NavBarCubit>().hideNavBar();
+    backButtonPressed = true;
   }
 
   void closeSearchBar() {
@@ -97,16 +104,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
     widget.toggleScreen();
     context.read<NavBarCubit>().showNavBar();
     searchController.clear();
-  }
-
-  Future<bool> handleBackButtonPress() async {
-    if (isOpen) {
-      setState(() {
-        closeSearchBar();
-      });
-      return false;
-    }
-    return true;
+    backButtonPressed = false;
   }
 
   @override

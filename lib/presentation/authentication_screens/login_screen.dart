@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<AuthenticationCubit, AuthenticationStates>(
         listener: (context, state) {
           if(state is LoginSuccessState){
-            if(state.loginModel.status!){
+            if(state.loginModel.status ?? false){
               final token = state.loginModel.data?.token;
               CacheHelper.saveData(key: 'token', value: token).then((value) {
                 if (context.mounted){

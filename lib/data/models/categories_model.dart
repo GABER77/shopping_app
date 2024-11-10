@@ -10,22 +10,22 @@ class CategoriesModel{
 
 class CategoriesDataModel{
   int? currentPage;
-  List<DataModel> data = [];
+  List<CategoryModel> data = [];
 
   CategoriesDataModel.fromJson(Map<String, dynamic> json){
     currentPage =  json['current_page'];
     json['data'].forEach((element){
-      data.add(DataModel.fromJson(element));
+      data.add(CategoryModel.fromJson(element));
     });
   }
 }
 
-class DataModel{
+class CategoryModel{
   int? id;
   String? name;
   String? image;
 
-  DataModel.fromJson(Map<String, dynamic> json){
+  CategoryModel.fromJson(Map<String, dynamic> json){
     id =  json['id'];
     name =  json['name'];
     image =  json['image'];

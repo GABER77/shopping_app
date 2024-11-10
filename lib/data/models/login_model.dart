@@ -1,16 +1,16 @@
 class LoginModel {
   bool? status;
   String? message;
-  UserDataModel? data;
+  UserModel? data;
 
   LoginModel.fromJson(Map<String, dynamic> json){
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? UserDataModel.fromJson(json['data']) : null;
+    data = json['data'] != null ? UserModel.fromJson(json['data']) : null;
   }
 }
 
-class UserDataModel {
+class UserModel {
   int? id;
   String? name;
   String? email;
@@ -20,7 +20,7 @@ class UserDataModel {
   int? credit;
   String? token;
 
-  UserDataModel.fromJson(Map<String, dynamic> json){
+  UserModel.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
     email = json['email'];

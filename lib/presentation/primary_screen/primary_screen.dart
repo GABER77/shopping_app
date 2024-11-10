@@ -26,6 +26,8 @@ class _PrimaryScreenState extends State<PrimaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
+        physics: !showHomeScreen ? const NeverScrollableScrollPhysics() : null,
+        // ToDo: #
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
