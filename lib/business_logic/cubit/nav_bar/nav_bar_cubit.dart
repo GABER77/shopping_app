@@ -17,8 +17,8 @@ class NavBarCubit extends Cubit<NavBarStates> {
   List<Widget> screens = [
     const PrimaryScreen(),
     const CartScreen(),
-    const FavoriteScreen(),
-    const SettingsScreen(),
+    FavoriteScreen(),
+    SettingsScreen(),
   ];
 
   List<IconData> navBarIcons = [

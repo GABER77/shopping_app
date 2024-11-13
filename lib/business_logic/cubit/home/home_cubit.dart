@@ -51,28 +51,6 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  void changeFavorites(int productID){
-    favorites[productID] = !favorites[productID]!;
-    emit(HomeLoadingChangeFavoritesState());
-    DioHelper.postData(
-      url: FAVORITES,
-      data: {
-        'product_id' : productID,
-      },
-      token: CacheHelper.getData(key: 'token'),
-    ).then((value){
-      changeFavoritesModel = ChangeFavoritesModel.fromJson(value?.data);
-      if(!changeFavoritesModel!.status!){
-        favorites[productID] = !favorites[productID]!;
-      }
-      emit(HomeSuccessChangeFavoritesState(changeFavoritesModel!));
-    }).catchError((error){
-      print(error.toString());
-      favorites[productID] = !favorites[productID]!;
-      emit(HomeErrorChangeFavoritesState());
-    });
-  }
-
   void getFavoritesData(){
     emit(HomeLoadingGetFavoritesState());
     DioHelper.getData(
@@ -86,4 +64,29 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeErrorGetFavoritesState());
     });
   }
+
+  void changeFavorites(int productID){
+    favorites[productID] = !favorites[productID]!;
+    emit(HomeLoadingChangeFavoritesState());
+    DioHelper.postData(
+      url: FAVORITES,
+      data: {
+        'product_id' : productID,
+      },
+      token: CacheHelper.getData(key: 'token'),
+    ).then((value){
+      changeFavoritesModel = ChangeFavoritesModel.fromJson(value?.data);
+      if(!changeFavoritesModel!.status!){
+        favorites[productID] = !favorites[productID]!;
+      } else{
+        getFavoritesData();
+      }
+      emit(HomeSuccessChangeFavoritesState(changeFavoritesModel!));
+    }).catchError((error){
+      print(error.toString());
+      favorites[productID] = !favorites[productID]!;
+      emit(HomeErrorChangeFavoritesState());
+    });
+  }
+
 }

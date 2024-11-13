@@ -33,20 +33,13 @@ class _PrimaryScreenState extends State<PrimaryScreen> {
           SliverAppBar(
             floating: true,
             snap: true,
-            leading: showHomeScreen ? Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.r),
+            leading: showHomeScreen ? IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: AppColors.secondaryColor,
+                size: 22.sp,
               ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.notifications,
-                  color: AppColors.secondaryColor,
-                  size: 22.sp,
-                ),
-                onPressed: () {},
-              ),
+              onPressed: () {},
             ) : null,
             title: showHomeScreen ? Row(
               mainAxisAlignment: MainAxisAlignment.center,

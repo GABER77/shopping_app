@@ -80,7 +80,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
           icon: Icon(
             Icons.search,
             color: AppColors.secondaryColor,
-            size: 25.sp,
+            size: 26.sp,
           ),
           onPressed: () {
             setState(() {

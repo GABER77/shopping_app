@@ -6,23 +6,38 @@ import '../../business_logic/cubit/home/home_cubit.dart';
 import '../../business_logic/cubit/home/home_states.dart';
 import '../../shared/constants/colors.dart';
 import '../../shared/constants/spaces.dart';
-import '../../shared/widgets/progress_indicator.dart';
+import 'is_favorite_widgets.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({super.key});
+  FavoriteScreen({super.key});
+  FavoritesModel? favoritesModel;
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      HomeCubit.get(context).getFavoritesData();
+    });
+
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is HomeSuccessGetFavoritesState) {
+          favoritesModel = HomeCubit.get(context).favoritesModel!;
+        }
+      },
       builder: (context, state) {
-        final favoritesModel = HomeCubit.get(context).favoritesModel;
-        return ConditionalProgressIndicator(
-          condition: favoritesModel !=null,
-          widgetIfTrue: favoritesModel != null
-              ? favoritesBuilder(favoritesModel, context)
-              : const Center(child: Text('No data available')),
-        );
+        if (favoritesModel != null) {
+          if (favoritesModel?.data?.data?.isEmpty ?? true) {
+            return const Center(child: Text('No Favorites'));
+          } else {
+            return favoritesBuilder(favoritesModel!, context);
+          }
+        }
+        else if (state is! HomeSuccessGetFavoritesState){
+          return const Center(child: CircularProgressIndicator());
+        }
+        else {
+          return const Center(child: Text('No Data'));
+        }
       },
     );
   }
@@ -33,12 +48,12 @@ Widget favoritesBuilder(FavoritesModel model, context) => Padding(
   child: ListView.separated(
     itemCount: model.data!.data!.length,
     itemBuilder: (context, index) => buildFavoriteItem(model.data!.data![index], context),
-    separatorBuilder: (context, index) => SizedBox(height: 20.h),
+    separatorBuilder: (context, index) => SizedBox(height: 10.h),
   ),
 );
 
 Widget buildFavoriteItem(FavoriteData model, context) => Container(
-  height: 110.h,
+  height: 100.h,
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(15.r),
     color: AppColors.primaryColor2,
@@ -49,7 +64,7 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
       children: [
         Container(
           width: 110.w,
-          height: 110.h,
+          height: 100.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
             image: DecorationImage(
@@ -61,7 +76,7 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
           ),
         ),
         SizedBox(
-          width: 15.w,
+          width: 10.w,
         ),
         Expanded(
           child: Column(
@@ -72,7 +87,7 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 15.sp,
+                  fontSize: 13.sp,
                   color: AppColors.secondaryColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -83,7 +98,7 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
                   Text(
                     'LE ${model.product!.price.round()}',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
@@ -94,7 +109,7 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
                         ? 'LE ${model.product!.oldPrice.round()}'
                         : '',
                     style: TextStyle(
-                      fontSize: 13.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
@@ -107,10 +122,13 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
                     },
                     icon: CircleAvatar(
                       backgroundColor: AppColors.primaryColor1,
-                      child: HomeCubit.get(context).favorites[model.product!.id]!
+                      child: (model.product != null && HomeCubit.get(context).favorites[model.product!.id] != null)
+                          ? (HomeCubit.get(context).favorites[model.product!.id]!
                           ? inFavorites()
+                          : notInFavorites())
                           : notInFavorites(),
                     ),
+
                   ),
                 ],
               ),
@@ -120,16 +138,4 @@ Widget buildFavoriteItem(FavoriteData model, context) => Container(
       ],
     ),
   ),
-);
-
-Widget inFavorites() => Icon(
-  Icons.favorite,
-  size: 17.sp,
-  color: Colors.red,
-);
-
-Widget notInFavorites() => Icon(
-  Icons.favorite_border,
-  size: 17.sp,
-  color: AppColors.secondaryColor,
 );

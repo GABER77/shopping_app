@@ -4,6 +4,7 @@ import 'package:shopping_app/business_logic/cubit/home/home_cubit.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
 import '../../../data/models/home_model.dart';
 import '../../../shared/constants/spaces.dart';
+import '../../favorite_screen/is_favorite_widgets.dart';
 
 class ProductsWidget extends StatelessWidget {
   const ProductsWidget({
@@ -74,8 +75,7 @@ class ProductsWidget extends StatelessWidget {
   }
 }
 
-Widget buildProductGrid(ProductModel model, context) =>
-    Column(
+Widget buildProductGrid(ProductModel model, context) => Column(
       children: [
         Stack(
           alignment: Alignment.topRight,
@@ -165,15 +165,3 @@ Widget buildProductGrid(ProductModel model, context) =>
         ),
       ],
     );
-
-Widget inFavorites() => Icon(
-  Icons.favorite,
-  size: 17.sp,
-  color: Colors.red,
-);
-
-Widget notInFavorites() => Icon(
-  Icons.favorite_border,
-  size: 17.sp,
-  color: AppColors.secondaryColor,
-);
