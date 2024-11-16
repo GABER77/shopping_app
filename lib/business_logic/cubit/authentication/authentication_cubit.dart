@@ -10,6 +10,7 @@ class AuthenticationCubit extends Cubit<AuthenticationStates>{
   static AuthenticationCubit get(context) => BlocProvider.of(context);
 
   LoginModel? loginModel;
+  LoginModel? registerModel;
 
   void userLogin({
     required String email,
@@ -29,6 +30,31 @@ class AuthenticationCubit extends Cubit<AuthenticationStates>{
     }).catchError((error){
       print(error.toString());
       emit(LoginErrorState(error.toString()));
+    });
+  }
+
+  void userRegister({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+  })
+  {
+    emit(RegisterLoadingState());
+    DioHelper.postData(
+      url: REGISTER,
+      data: {
+        'name' : name,
+        'email' : email,
+        'password' : password,
+        'phone' : phone,
+      },
+    ).then((value) {
+      registerModel = LoginModel.fromJson(value?.data);
+      emit(RegisterSuccessState(registerModel!));
+    }).catchError((error){
+      print(error.toString());
+      emit(RegisterErrorState(error.toString()));
     });
   }
 

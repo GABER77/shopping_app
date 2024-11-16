@@ -25,7 +25,7 @@ class NavBarCubit extends Cubit<NavBarStates> {
     Icons.home,
     Icons.shopping_cart,
     Icons.favorite,
-    Icons.settings,
+    Icons.person,
   ];
 
   void changeScreen(int index){

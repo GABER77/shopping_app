@@ -3,12 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/authentication/authentication_cubit.dart';
-import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_cubit.dart';
-import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
 import 'package:shopping_app/presentation/authentication_screens/login_screen.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
-import 'package:shopping_app/shared/core/nav_bar_layout.dart';
 import 'package:shopping_app/shared/core/navigation.dart';
 import 'package:shopping_app/shared/core/toast.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
@@ -44,7 +41,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocProvider(
       create: (BuildContext context) => AuthenticationCubit(),
       child: BlocConsumer<AuthenticationCubit, AuthenticationStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is RegisterSuccessState){
+            if(state.registerModel.status ?? false){
+              customToast(
+                message: state.registerModel.message,
+                state: ToastStates.SUCCESS,
+              );
+            }
+            else{
+              customToast(
+                message: state.registerModel.message,
+                state: ToastStates.ERROR,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: SingleChildScrollView(
@@ -167,20 +179,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           Spaces.vSpacingM,
                           ConditionalProgressIndicator(
-                            condition: state is! LoginLoadingState,
+                            condition: state is! RegisterLoadingState,
                             widgetIfTrue: DefaultButton(
                               onPressed: () {
                                 if(formKey.currentState!.validate()){
-                                  if (isAgreed == false) {
-                                    customToast(
-                                      state: ToastStates.ERROR,
-                                      message: 'Please accept the terms'
+                                  if (isAgreed) {
+                                    AuthenticationCubit.get(context).userRegister(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      phone: phoneController.text,
                                     );
                                   }
                                   else {
-                                    AuthenticationCubit.get(context).userLogin(
-                                      email: emailController.text,
-                                      password: passwordController.text,
+                                    customToast(
+                                        state: ToastStates.ERROR,
+                                        message: 'Please accept the terms'
                                     );
                                   }
                                 }
@@ -205,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              navigateTo(context, LoginScreen());
+                              navigateToAndClose(context, LoginScreen());
                             },
                             child: Text(
                               "Log In",

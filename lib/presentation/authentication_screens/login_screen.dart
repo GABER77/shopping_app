@@ -212,7 +212,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              navigateTo(context, RegisterScreen());
+                              navigateToAndClose(context, const RegisterScreen());
                             },
                             child: Text(
                               "Sign up",
