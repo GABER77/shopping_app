@@ -4,20 +4,19 @@ import 'package:shopping_app/data/api_config/end_points.dart';
 import 'package:shopping_app/data/models/categories_model.dart';
 import 'package:shopping_app/data/models/home_model.dart';
 import '../../../data/models/change_favorites_model.dart';
-import '../../../data/models/favorites_model.dart';
 import '../../../data/shared_preferences/cache_helper.dart';
+import '../../../data/repository/favorite_repositery.dart';
 import 'home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitialState());
 
   static HomeCubit get(context) => BlocProvider.of(context);
-  
+  final FavoritesRepository favoritesRepository = FavoritesRepository.instance;
+
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
-  FavoritesModel? favoritesModel;
   ChangeFavoritesModel? changeFavoritesModel;
-  Map<int, bool> favorites = {};
 
   void getHomeData(){
     emit(HomeLoadingState());
@@ -27,7 +26,7 @@ class HomeCubit extends Cubit<HomeStates> {
     ).then((value){
       homeModel = HomeModel.fromJson(value?.data);
       homeModel?.data?.products.forEach((element) {
-        favorites.addAll({
+        favoritesRepository.favorites.addAll({
           element.id! : element.inFavorites ?? false,
         });
       });
@@ -51,23 +50,9 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  void getFavoritesData(){
-    emit(HomeLoadingGetFavoritesState());
-    DioHelper.getData(
-      url: FAVORITES,
-      token: CacheHelper.getData(key: 'token'),
-    ).then((value){
-      favoritesModel = FavoritesModel.fromJson(value?.data);
-      emit(HomeSuccessGetFavoritesState());
-    }).catchError((error){
-      print(error.toString());
-      emit(HomeErrorGetFavoritesState());
-    });
-  }
-
   void changeFavorites(int productID){
-    favorites[productID] = !favorites[productID]!;
-    emit(HomeLoadingChangeFavoritesState());
+    favoritesRepository.favorites[productID] = !favoritesRepository.favorites[productID]!;
+    emit(HomeLoadingChangeFavoriteState());
     DioHelper.postData(
       url: FAVORITES,
       data: {
@@ -77,15 +62,15 @@ class HomeCubit extends Cubit<HomeStates> {
     ).then((value){
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value?.data);
       if(!changeFavoritesModel!.status!){
-        favorites[productID] = !favorites[productID]!;
-      } else{
-        getFavoritesData();
+        favoritesRepository.favorites[productID] = !favoritesRepository.favorites[productID]!;
       }
-      emit(HomeSuccessChangeFavoritesState(changeFavoritesModel!));
+      emit(HomeSuccessChangeFavoriteState());
     }).catchError((error){
       print(error.toString());
-      favorites[productID] = !favorites[productID]!;
-      emit(HomeErrorChangeFavoritesState());
+      if(!changeFavoritesModel!.status!){
+        favoritesRepository.favorites[productID] = !favoritesRepository.favorites[productID]!;
+      }
+      emit(HomeErrorChangeFavoriteState());
     });
   }
 

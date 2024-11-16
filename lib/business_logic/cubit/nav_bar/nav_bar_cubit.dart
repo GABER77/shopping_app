@@ -18,7 +18,7 @@ class NavBarCubit extends Cubit<NavBarStates> {
     const PrimaryScreen(),
     const CartScreen(),
     FavoriteScreen(),
-    SettingsScreen(),
+    const SettingsScreen(),
   ];
 
   List<IconData> navBarIcons = [

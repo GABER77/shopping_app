@@ -6,9 +6,8 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
-  final bool obscureText;
   final IconData? prefixIcon;
-  final IconData? suffixIcon;
+  final bool isPassword;
   final VoidCallback? onSuffixIconPressed;
 
   const CustomTextFormField({
@@ -17,9 +16,8 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.validator,
-    this.obscureText = false,
     this.prefixIcon,
-    this.suffixIcon,
+    this.isPassword = false,
     this.onSuffixIconPressed,
   });
 
@@ -28,8 +26,14 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-
   FocusNode myFocusNode = FocusNode();
+  bool _obscureText = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   void initState() {
@@ -50,24 +54,27 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      obscureText: widget.obscureText,
+      obscureText: widget.isPassword ? _obscureText : false,
       validator: widget.validator,
       focusNode: myFocusNode,
       decoration: InputDecoration(
         labelText: widget.labelText,
         labelStyle: TextStyle(
-          color: myFocusNode.hasFocus
-              ? AppColors.textColor
-              : null,
+          color: myFocusNode.hasFocus ? AppColors.textColor : null,
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.secondaryColor),
         ),
         prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
-        suffixIcon: widget.suffixIcon != null ? IconButton(
-          icon: Icon(widget.suffixIcon),
-          onPressed: widget.onSuffixIconPressed,
-        ) : null,
+        suffixIcon: widget.isPassword == true
+            ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: AppColors.secondaryColor,
+                ),
+                onPressed: _toggleVisibility,
+              )
+            : null,
       ),
     );
   }

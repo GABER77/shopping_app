@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/authentication/authentication_cubit.dart';
 import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:shopping_app/data/shared_preferences/cache_helper.dart';
+import 'package:shopping_app/presentation/authentication_screens/Register_screen.dart';
 import 'package:shopping_app/presentation/authentication_screens/rounded_clip_path.dart';
 import 'package:shopping_app/presentation/authentication_screens/text_field_widget.dart';
 import 'package:shopping_app/shared/core/nav_bar_layout.dart';
@@ -20,8 +21,8 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomTextFormField(
-                            labelText: 'Email',
+                            labelText: 'Email Address',
                             controller: emailController,
                             prefixIcon: Icons.email_outlined,
                             keyboardType: TextInputType.emailAddress,
@@ -143,17 +144,13 @@ class LoginScreen extends StatelessWidget {
                             labelText: 'Password',
                             controller: passwordController,
                             prefixIcon: Icons.lock_outline,
-                            suffixIcon: AuthenticationCubit.get(context).suffixIcon,
                             keyboardType: TextInputType.visiblePassword,
-                            obscureText: AuthenticationCubit.get(context).isPasswordHidden,
+                            isPassword: true,
                             validator: (value){
                               if(value!.isEmpty){
                                 return 'Please enter your Password';
                               }
                               return null;
-                            },
-                            onSuffixIconPressed: () {
-                              AuthenticationCubit.get(context).changePasswordVisibility();
                             },
                           ),
                           Spaces.vSpacingXL,
@@ -214,7 +211,9 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              navigateTo(context, RegisterScreen());
+                            },
                             child: Text(
                               "Sign up",
                               style: TextStyle(

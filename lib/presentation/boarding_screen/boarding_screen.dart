@@ -104,7 +104,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
                     height: 57,
                     child: const Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.white,
+                      color: AppColors.primaryColor1,
                     ),
                 ),
               ],

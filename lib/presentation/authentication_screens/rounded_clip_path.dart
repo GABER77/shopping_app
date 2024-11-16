@@ -10,7 +10,7 @@ class RoundedClipPath extends CustomClipper<Path>{
     path.lineTo(0, h * 0.85);
     path.quadraticBezierTo(
       w / 2,
-      h + 40,
+      h + (h * 0.15),
       w,
       h * 0.85,
     );

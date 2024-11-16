@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/settings/settings_states.dart';
-import 'package:shopping_app/presentation/search_screen/editable_text_field_widget.dart';
+import 'package:shopping_app/presentation/settings_screen/editable_text_field_widget.dart';
 import 'package:shopping_app/shared/widgets/default_button.dart';
 import 'package:shopping_app/shared/widgets/progress_indicator.dart';
 import '../../business_logic/cubit/settings/settings_cubit.dart';

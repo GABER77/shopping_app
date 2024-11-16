@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/data/api_config/dio_helper.dart';
 import 'package:shopping_app/data/api_config/end_points.dart';
@@ -10,15 +9,7 @@ class AuthenticationCubit extends Cubit<AuthenticationStates>{
 
   static AuthenticationCubit get(context) => BlocProvider.of(context);
 
-  IconData suffixIcon = Icons.visibility_outlined;
-  bool isPasswordHidden = true;
   LoginModel? loginModel;
-
-  void changePasswordVisibility(){
-    isPasswordHidden = !isPasswordHidden;
-    suffixIcon = isPasswordHidden ? Icons.visibility_outlined : Icons.visibility_off_outlined;
-    emit(LoginChangePasswordVisibilityState());
-  }
 
   void userLogin({
     required String email,

@@ -54,7 +54,6 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => HomeCubit()
             ..getHomeData()
             ..getCategoriesData()
-            ..getFavoritesData()
         ),
       ],
       child: ScreenUtilInit(

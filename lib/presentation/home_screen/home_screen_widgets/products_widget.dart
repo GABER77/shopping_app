@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shopping_app/business_logic/cubit/home/home_cubit.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
+import 'package:shopping_app/shared/widgets/favorite_button_widget.dart';
 import '../../../data/models/home_model.dart';
 import '../../../shared/constants/spaces.dart';
-import '../../favorite_screen/is_favorite_widgets.dart';
 
 class ProductsWidget extends StatelessWidget {
   const ProductsWidget({
@@ -96,16 +95,9 @@ Widget buildProductGrid(ProductModel model, context) => Column(
                 color: Colors.white,
               ),
             ),
-            IconButton(
-                onPressed:() {
-                  HomeCubit.get(context).changeFavorites(model.id!);
-                },
-                icon: CircleAvatar(
-                  backgroundColor: AppColors.primaryColor2,
-                  child: HomeCubit.get(context).favorites[model.id]!
-                      ? inFavorites()
-                      : notInFavorites(),
-                ),
+            FavoriteButton(
+              id: model.id!,
+              cubit: WhichCubit.HOME,
             ),
           ],
         ),
