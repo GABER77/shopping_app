@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_states.dart';
 import 'package:shopping_app/presentation/cart_screen/cart_screen.dart';
+import 'package:shopping_app/presentation/profile_screen/profile_screen.dart';
 import '../../../presentation/favorite_screen/favorite_screen.dart';
 import '../../../presentation/primary_screen/primary_screen.dart';
-import '../../../presentation/settings_screen/setting_screen.dart';
 
 class NavBarCubit extends Cubit<NavBarStates> {
   NavBarCubit() : super(NavBarInitialState());
@@ -18,7 +18,7 @@ class NavBarCubit extends Cubit<NavBarStates> {
     const PrimaryScreen(),
     const CartScreen(),
     FavoriteScreen(),
-    const SettingsScreen(),
+    const ProfileScreen(),
   ];
 
   List<IconData> navBarIcons = [

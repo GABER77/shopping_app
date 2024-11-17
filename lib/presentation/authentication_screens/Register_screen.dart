@@ -56,6 +56,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             }
           }
+          else if (state is RegisterErrorState) {
+            customToast(
+              message: 'Something Wrong',
+              state: ToastStates.ERROR,
+            );
+          }
         },
         builder: (context, state) {
           return Scaffold(
