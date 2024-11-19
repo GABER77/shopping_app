@@ -26,11 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is HomeSuccessState) {
           homeModel = HomeCubit.get(context).homeModel;
         }
-        else if ( state is HomeSuccessGetCategoriesState) {
+        else if (state is HomeSuccessGetCategoriesState) {
           categoriesModel = HomeCubit.get(context).categoriesModel;
         }
       },
       builder: (context, state) {
+        // ToDo : #
+        homeModel = HomeCubit.get(context).homeModel;
+        categoriesModel = HomeCubit.get(context).categoriesModel;
         if (homeModel != null && categoriesModel != null) {
           return homeBuilder(homeModel!, categoriesModel!);
         }

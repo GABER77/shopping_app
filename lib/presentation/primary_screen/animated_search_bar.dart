@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopping_app/business_logic/cubit/nav_bar/nav_bar_cubit.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
 
+import '../../business_logic/cubit/search/search_cubit.dart';
+
 class AnimatedSearchBar extends StatefulWidget {
 
   final VoidCallback toggleScreen;
@@ -16,8 +18,7 @@ class AnimatedSearchBar extends StatefulWidget {
 class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
 
   bool isOpen = false;
-  bool backButtonPressed = false;
-  final TextEditingController searchController = TextEditingController();
+  var searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
         }
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
         width: isOpen ? 355.w : 50,
         height: 50,
@@ -49,7 +50,11 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
                     TextField(
                       controller: searchController,
                       autofocus: true,
-                      onSubmitted: (value) {},
+                      onChanged: (value) {
+                        if(searchController.text != '') {
+                          SearchCubit.get(context).search(searchController.text);
+                        }
+                      },
                       decoration: InputDecoration(
                         hintText: 'Search...',
                         hintStyle: TextStyle(
@@ -96,7 +101,6 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
     isOpen = !isOpen;
     widget.toggleScreen();
     context.read<NavBarCubit>().hideNavBar();
-    backButtonPressed = true;
   }
 
   void closeSearchBar() {
@@ -104,7 +108,6 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
     widget.toggleScreen();
     context.read<NavBarCubit>().showNavBar();
     searchController.clear();
-    backButtonPressed = false;
   }
 
   @override

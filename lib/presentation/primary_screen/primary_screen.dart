@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopping_app/business_logic/cubit/search/search_cubit.dart';
 import 'package:shopping_app/presentation/home_screen/home_screen.dart';
 import 'package:shopping_app/presentation/search_screen/search_screen.dart';
 import '../../shared/constants/colors.dart';
@@ -24,48 +26,49 @@ class _PrimaryScreenState extends State<PrimaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        physics: !showHomeScreen ? const NeverScrollableScrollPhysics() : null,
-        // ToDo: #
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            floating: true,
-            snap: true,
-            leading: showHomeScreen ? IconButton(
-              icon: Icon(
-                Icons.notifications,
-                color: AppColors.secondaryColor,
-                size: 22.sp,
-              ),
-              onPressed: () {},
-            ) : null,
-            title: showHomeScreen ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/Cart.png',
-                  width: 32.w,
-                  height: 32.h,
+    return BlocProvider(
+      create: (context) => SearchCubit(),
+      child: Scaffold(
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
+            SliverAppBar(
+              floating: true,
+              snap: true,
+              leading: showHomeScreen ? IconButton(
+                icon: Icon(
+                  Icons.notifications,
                   color: AppColors.secondaryColor,
+                  size: 22.sp,
                 ),
-                Spaces.hSpacingS,
-                Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 17.sp,
+                onPressed: () {},
+              ) : null,
+              title: showHomeScreen ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/Cart.png',
+                    width: 32.w,
+                    height: 32.h,
                     color: AppColors.secondaryColor,
                   ),
-                ),
+                  Spaces.hSpacingS,
+                  Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      color: AppColors.secondaryColor,
+                    ),
+                  ),
+                ],
+              ) : null,
+              actions: [
+                AnimatedSearchBar(toggleScreen: toggleScreen),
               ],
-            ) : null,
-            actions: [
-              AnimatedSearchBar(toggleScreen: toggleScreen),
-            ],
-          ),
-        ],
-        body: showHomeScreen ? const HomeScreen() : const SearchScreen(),
+            ),
+          ],
+          body: showHomeScreen ? const HomeScreen() : SearchScreen(),
+        ),
       ),
     );
   }

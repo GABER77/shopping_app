@@ -35,7 +35,7 @@ class FavoriteScreen extends StatelessWidget {
             }
           }
           else {
-            return const Center(child: Text('No Data'));
+            return  const Center(child: Text('No Data'));
           }
         },
       ),
@@ -44,7 +44,11 @@ class FavoriteScreen extends StatelessWidget {
 }
 
 Widget favoritesBuilder(FavoritesModel model, context) => Padding(
-  padding: EdgeInsets.all(15.r),
+  padding: EdgeInsets.only(
+    left: 15.w,
+    right: 15.w,
+    top: 15.h,
+  ),
   child: ListView.separated(
     itemCount: model.data!.data!.length,
     itemBuilder: (context, index) => buildFavoriteItem(model.data!.data![index], context, model.data!.data!, index),
@@ -59,12 +63,12 @@ Widget buildFavoriteItem(FavoriteData model, context, List<FavoriteData> favorit
     color: AppColors.primaryColor2,
   ),
   child: Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding:  const EdgeInsets.all(8.0),
     child: Row(
       children: [
         Container(
-          width: 110.w,
-          height: 100.h,
+          width: 105.w,
+          height: 85.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
             image: DecorationImage(

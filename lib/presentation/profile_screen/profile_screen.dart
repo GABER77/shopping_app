@@ -102,81 +102,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )
                   ],
                 ),
-                body: Padding(
-                  padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-                  child: Column(
-                    children: [
-                      if(state is ProfileLoadingUpdateState) const LinearProgressIndicator(),
-                      SizedBox(
-                        height: 17.h,
-                      ),
-                      EditableTextFormField(
-                        labelText: 'Name',
-                        controller: nameController,
-                        keyboardType: TextInputType.name,
-                        isEditable: isEditable,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Name Required';
-                          }
-                          return null;
-                        },
-                        prefixIcon: Icons.person,
-                      ),
-                      SizedBox(
-                        height: 17.h,
-                      ),
-                      EditableTextFormField(
-                        labelText: 'Email',
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        isEditable: false,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Email Required';
-                          }
-                          return null;
-                        },
-                        prefixIcon: Icons.email_outlined,
-                      ),
-                      SizedBox(
-                        height: 17.h,
-                      ),
-                      EditableTextFormField(
-                        labelText: 'Phone',
-                        controller: phoneController,
-                        keyboardType: TextInputType.phone,
-                        isEditable: isEditable,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Phone Number Required';
-                          }
-                          return null;
-                        },
-                        prefixIcon: Icons.plus_one,
-                      ),
-                      SizedBox(
-                        height: 25.h,
-                      ),
-                      DefaultButton(
-                        onPressed: () {
-                          CacheHelper.removeData(key: 'token').then((value) {
-                            if (value && context.mounted) {
-                              navigateToAndClose(context, LoginScreen());
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                    ),
+                    child: Column(
+                      children: [
+                        if(state is ProfileLoadingUpdateState) const LinearProgressIndicator(),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        EditableTextFormField(
+                          labelText: 'Name',
+                          controller: nameController,
+                          keyboardType: TextInputType.name,
+                          isEditable: isEditable,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Name Required';
                             }
-                          });
-                        },
-                        width: 220.w,
-                        height: 40.h,
-                        child: Text(
-                          'Sign out',
-                          style: TextStyle(
-                            fontSize: 17.sp,
-                            color: AppColors.primaryColor1,
+                            return null;
+                          },
+                          prefixIcon: Icons.person,
+                        ),
+                        SizedBox(
+                          height: 17.h,
+                        ),
+                        EditableTextFormField(
+                          labelText: 'Email',
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          isEditable: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Email Required';
+                            }
+                            return null;
+                          },
+                          prefixIcon: Icons.email_outlined,
+                        ),
+                        SizedBox(
+                          height: 17.h,
+                        ),
+                        EditableTextFormField(
+                          labelText: 'Phone',
+                          controller: phoneController,
+                          keyboardType: TextInputType.phone,
+                          isEditable: isEditable,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Phone Number Required';
+                            }
+                            return null;
+                          },
+                          prefixIcon: Icons.plus_one,
+                        ),
+                        SizedBox(
+                          height: 25.h,
+                        ),
+                        DefaultButton(
+                          onPressed: () {
+                            CacheHelper.removeData(key: 'token').then((value) {
+                              if (value && context.mounted) {
+                                navigateToAndClose(context, LoginScreen());
+                              }
+                            });
+                          },
+                          width: 220.w,
+                          height: 40.h,
+                          child: Text(
+                            'Sign out',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: AppColors.primaryColor1,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
