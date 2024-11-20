@@ -40,7 +40,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               'SKIP',
               style: TextStyle(
                 fontSize: 12.sp,
-                color: AppColors.textColor,
+                color: Colors.white,
               ),
             ),
           ),

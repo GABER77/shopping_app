@@ -92,7 +92,7 @@ Widget buildFavoriteItem(FavoriteData model, context, List<FavoriteData> favorit
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 13.sp,
-                  color: AppColors.secondaryColor,
+                  color: AppColors.textColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

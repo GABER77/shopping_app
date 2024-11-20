@@ -39,6 +39,7 @@ class ProductModel{
   dynamic discount;
   String? image;
   String? name;
+  String? description;
   bool? inFavorites;
   bool? inCart;
 
@@ -49,6 +50,7 @@ class ProductModel{
     discount = json['discount'];
     image = json['image'];
     name = json['name'];
+    description = json['description'];
     inFavorites = json['in_favorites'];
     inCart = json['in_cart'];
   }

@@ -86,7 +86,7 @@ Widget resultItem(Product model) => Container(
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 13.sp,
-                  color: AppColors.secondaryColor,
+                  color: AppColors.textColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

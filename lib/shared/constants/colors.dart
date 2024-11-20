@@ -4,7 +4,7 @@ class AppColors{
   static const primaryColor1 = Color(0xFF312C51);
   static const primaryColor2 = Color(0xFF48426D);
   static const secondaryColor = Color(0xFFF0C38E);
-  static const textColor = Color(0xFFF0C38E);
+  static const textColor = Colors.white;
 
   static const scaffoldColorLight = Colors.white;
   static const appBarColorLight = Colors.white;

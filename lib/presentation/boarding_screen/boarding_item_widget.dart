@@ -30,6 +30,7 @@ class BoardingItem extends StatelessWidget {
           style: TextStyle(
             fontSize: 22.sp,
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         Spaces.vSpacingM,
@@ -37,6 +38,7 @@ class BoardingItem extends StatelessWidget {
           model.body,
           style: TextStyle(
             fontSize: 15.sp,
+            color: Colors.white,
           ),
         ),
       ],

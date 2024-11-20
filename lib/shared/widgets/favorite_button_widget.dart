@@ -6,12 +6,19 @@ import '../../business_logic/cubit/home/home_cubit.dart';
 import '../constants/colors.dart';
 
 class FavoriteButton extends StatelessWidget {
-  FavoriteButton({super.key, required this.id, required this.cubit, this.extraAction});
+  FavoriteButton({
+    super.key,
+    required this.id,
+    required this.cubit,
+    this.extraAction,
+    this.buttonColor,
+  });
 
   final FavoritesRepository favoritesRepository = FavoritesRepository.instance;
   final int id;
   final WhichCubit cubit;
   final VoidCallback? extraAction;
+  final Color? buttonColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class FavoriteButton extends StatelessWidget {
         }
       },
       icon: CircleAvatar(
-          backgroundColor: AppColors.primaryColor1,
+          backgroundColor: buttonColor ?? AppColors.primaryColor1,
           child: favoritesRepository.favorites[id]!
               ? inFavorites()
               : notInFavorites()
