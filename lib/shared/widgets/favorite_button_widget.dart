@@ -34,7 +34,7 @@ class FavoriteButton extends StatelessWidget {
       },
       icon: CircleAvatar(
           backgroundColor: buttonColor ?? AppColors.primaryColor1,
-          child: favoritesRepository.favorites[id]!
+          child: favoritesRepository.favorites[id] ?? true
               ? inFavorites()
               : notInFavorites()
       ),

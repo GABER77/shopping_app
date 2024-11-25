@@ -52,6 +52,9 @@ class LoginScreen extends StatelessWidget {
               );
             }
           }
+          if(state is LoginErrorState) {
+            customToast(message: state.error, state: ToastStates.ERROR);
+          }
         },
         builder: (context, state) {
           return Scaffold(

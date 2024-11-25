@@ -30,7 +30,7 @@ class _AnimatedSearchBarState extends State<AnimatedSearchBar> {
         }
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 250),
         curve: Curves.easeOut,
         width: isOpen ? 355.w : 50,
         height: 50,

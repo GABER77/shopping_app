@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_app/data/models/home_model.dart';
 import 'package:shopping_app/presentation/home_screen/home_screen_widgets/categories_widget.dart';
+import 'package:shopping_app/shared/constants/colors.dart';
 import '../../business_logic/cubit/home/home_cubit.dart';
 import '../../business_logic/cubit/home/home_states.dart';
 import '../../data/models/categories_model.dart';
@@ -21,6 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: AppColors.primaryColor1,
+        ));
+
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is HomeSuccessState) {

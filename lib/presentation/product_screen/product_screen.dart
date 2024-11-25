@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shopping_app/data/models/home_model.dart';
 import 'package:shopping_app/presentation/product_screen/add_to_cart_button.dart';
 import 'package:shopping_app/shared/constants/colors.dart';
 import 'package:shopping_app/shared/core/navigation.dart';
@@ -10,7 +9,7 @@ import '../../shared/constants/spaces.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen(this.productModel, {super.key});
-  final ProductModel? productModel;
+  final dynamic productModel;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -42,7 +41,7 @@ class _ProductScreenState extends State<ProductScreen> {
           SliverAppBar(
             systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.dark,
-              statusBarColor: Colors.white,
+              statusBarColor: Colors.transparent,
             ),
             expandedHeight: 200.h,
             backgroundColor: Colors.white,
@@ -149,6 +148,9 @@ class _ProductScreenState extends State<ProductScreen> {
               id: widget.productModel!.id!,
               cubit: WhichCubit.HOME,
               buttonColor: AppColors.primaryColor2,
+              extraAction: () {
+                setState(() {});
+              },
             ),
           ],
         ),
@@ -261,5 +263,4 @@ class _ProductScreenState extends State<ProductScreen> {
       ],
     ),
   );
-
 }

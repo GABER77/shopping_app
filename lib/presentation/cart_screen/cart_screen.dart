@@ -8,7 +8,7 @@ class CartScreen extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: Text(
-          'Cart Screen',
+          'Cart is Empty',
         ),
       ),
     );

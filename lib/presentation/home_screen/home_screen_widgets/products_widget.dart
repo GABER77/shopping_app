@@ -80,10 +80,10 @@ class ProductsWidget extends StatelessWidget {
 }
 
 Widget buildProductGrid(ProductModel model, context) => InkWell(
-  onTap: () {
-    navigateTo(context, ProductScreen(model));
-  },
-  child: Column(
+      onTap: () {
+        navigateTo(context, ProductScreen(model));
+      },
+      child: Column(
         children: [
           Stack(
             alignment: Alignment.topRight,
@@ -166,4 +166,4 @@ Widget buildProductGrid(ProductModel model, context) => InkWell(
           ),
         ],
       ),
-);
+    );

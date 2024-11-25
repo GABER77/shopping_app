@@ -52,7 +52,7 @@ ThemeData darkMode = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarColor: AppColors.appBarColorDark,
+      //statusBarColor: AppColors.appBarColorDark,
       statusBarIconBrightness: Brightness.light,
     ),
     scrolledUnderElevation: 0,

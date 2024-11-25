@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CheckboxListTile(
                             title: Text(
                               'I agree to the Terms and Conditions',
-                              style: TextStyle(fontSize: 14.sp),
+                              style: TextStyle(fontSize: 12.sp),
                             ),
                             value: isAgreed,
                             onChanged: (bool? value) {
