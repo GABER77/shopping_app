@@ -3,10 +3,6 @@
 
 # **Onboarding Screen**
 <img src="https://github.com/user-attachments/assets/ed7a0404-6cbf-4459-ba51-116858ed4f95" alt="Description of Image 1" width="300" />
-&nbsp;&nbsp;&nbsp;
-<img src="https://github.com/user-attachments/assets/089a0201-d7eb-4555-adf8-ea39713967e9" alt="Description of Image 2" width="300" />
-&nbsp;&nbsp;&nbsp;
-<img src="https://github.com/user-attachments/assets/fdeb8a67-a8a1-4252-bc09-2e8352602102" alt="Description of Image 3" width="300" />
 <br><br>
 
 # **Authentication Screens**
